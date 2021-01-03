@@ -31,32 +31,6 @@
       label {
           display: block;
       }
-      /* h1 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        color: white;
-      }
-      .top-articles {
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        font-size: 15px;
-        background-color: rgb(226, 222, 222);
-        height: 40px;
-        padding: 7px;
-      }
-      label {
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        font-size: 12px;
-      }
-      .form-container {
-        border: solid 1px rgb(184, 183, 183);
-        border-radius: 5px;
-      }
-      .p-abstract, .p-headline {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 15px;
-      } */
       .form-control {
           display: inline-flex;
           width: 60%;
@@ -192,20 +166,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="row">
-        <p class="search-history">Austin</p>
-        <p class="search-history">Chicago</p>
-    </div> -->
   </div>
-<!-- results container -->
-  <!-- <div class="container">
-    <div class="row">
-      <p class="top-articles"><i class="far fa-file-alt"></i> Top Articles</p>
-    </div>
-    <div class="row" id="results-pad">
-
-    </div>
-  </div> -->
 <body>
 
 
@@ -249,6 +210,7 @@ if (xUv >= 0 && xUv < 3){
 } 
 else if (xUv >= 3 && xUv < 6) {
     $("#current-uv-index").css("background-color", "yellow");
+    $("#current-uv-index").css("color", "black");
 }
 else if (xUv >= 6 && xUv < 8){
     $("#current-uv-index").css("background-color", "orange");
