@@ -25,9 +25,9 @@
         font-weight: bold;
         color: white;
       }
-      .container {
+      /* .container {
           border-style: solid;
-      }
+      } */
       label {
           display: block;
       }
@@ -42,16 +42,16 @@
           color: white;
       }
       .search-history {
-          border: solid 1px rgb(241, 240, 240);
+          /* border: solid 1px rgb(241, 240, 240); */
           background-color: white;
           display: block;
           margin-bottom: 0px;
           padding-top: 5px;
           padding-bottom: 5px;
       }
-      .col-4, .col-8 {
+    /*   .col-4, .col-8 {
           border: solid 1px rgb(211, 195, 195);
-      }
+      } */
       .col-4 {
           background-color: rgb(247, 242, 242);
       }
@@ -59,7 +59,7 @@
           padding-left: 5px;
           padding-right: 5px;
           padding-top: 5px;
-          border: solid 1px rgb(211, 195, 195);
+          /* border: solid 1px rgb(211, 195, 195); */
       }
       form {
           margin-bottom: 10px;
@@ -73,29 +73,29 @@
           display: flex;
           justify-content: space-between; 
           flex-wrap: wrap;
-          border: solid 1px rgb(211, 195, 195);
-          border-radius: 5px; 
+          /* border: solid 1px rgb(211, 195, 195); */
+          /* border-radius: 5px;  */
       }
       .daily-five-days {
         display: flex;   
         flex-direction: column;
-        border: solid 1px rgb(211, 195, 195);
+        /* border: solid 1px rgb(211, 195, 195); */
+        border-radius: 10px; 
         margin-bottom: 10px;
         background-color: blue;
         color: white;
+        padding-left: 15px;
+        padding-right: 15px;
       }
-      /* #date-day1, #temp-day1, #humid-day1, #date-day2, #temp-day2, #humid-day2 { */
-          /* display: flex; */
-          /* flex-direction: column; */
-      /* }    */
       .five-day-content, .five-day-date {
-          padding: 5px;
+          padding: 10px;
           margin-bottom: 10px;
-          font-size: 12px;
+          font-size: 15px;
       }
       .five-day-date {
           font-size: 18px;
           font-weight: bold;
+          text-align: left;
       }
       #current-uv-index {
           color: white;
@@ -117,23 +117,23 @@
     <!-- </br> -->
   <div class="container form-container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-4" id="search-block">
             <form>
                 <label for="search-city" class="form-label">Search for a City:</label>
                 <input class="form-control" type="text" id="search-city">
                  <button type="button" class="btn btn-outline-secondary" id="search-btn"><i class="fas fa-search"></i></button>
              </form>
-             <p class="search-history">Austin</p>
+            <!--  <p class="search-history">Austin</p>
              <p class="search-history">Chicago</p>
-             <p class="search-history">New York</p>
+             <p class="search-history">New York</p> -->
         </div>
         <div class="col-8">
             <div id="one-day">
                 <!-- City and Date Information will go here -->
-                <h4 id="city-date"></h4>            
-                <p id="current-temperature">Temperature:</p>
-                <p id="current-humidity">Humidity:</p>
-                <p id="current-wind-speed">Wind Speed:</p>
+                <h4 id="city-date"><img id="img-current-weather"></h4>            
+                <p id="current-temperature"></p>
+                <p id="current-humidity"></p>
+                <p id="current-wind-speed"></p>
                 <p>UV Index:  <span id="current-uv-index"></span></p>
             </div>
             <h4>5-Day Forecast:</h4>
@@ -142,27 +142,7 @@
                     <p class="five-day-date" id="date-day1">8/16/2019</p>
                     <p class="five-day-content" id="temp-day1">Temp: 86.84</p>
                     <p class="five-day-content" id="humid-day1">Humidity: 43%</p>
-                </div>
-                <div class="daily-five-days">
-                    <p class="five-day-date" id="date-day2">8/16/2019</p>
-                    <p class="five-day-content" id="temp-day2">Temp: 86.84</p>
-                    <p class="five-day-content"id="humid-day2">Humidity: 43%</p>
-                </div>
-                <div class="daily-five-days">
-                    <p class="five-day-date" id="date-day3">8/16/2019</p>
-                    <p class="five-day-content" id="temp-day3">Temp: 86.84</p>
-                    <p class="five-day-content" id="humid-day3">Humidity: 43%</p>
-                </div>
-                <div class="daily-five-days">
-                    <p class="five-day-date" id="date-day4">8/16/2019</p>
-                    <p class="five-day-content" id="temp-day4">Temp: 86.84</p>
-                    <p class="five-day-content" id="humid-day4">Humidity: 43%</p>
-                </div>
-                <div class="daily-five-days">
-                    <p class="five-day-date" id="date-day5">8/16/2019</p>
-                    <p class="five-day-content" id="temp-day5">Temp: 86.84</p>
-                    <p class="five-day-content" id="humid-day5">Humidity: 43%</p>
-                </div> -->
+                </div>-->
             </div>
         </div>
     </div>
@@ -174,33 +154,15 @@
 
   <script type="text/javascript">
 
-    
-    //  $("#search-btn").on("click", function() {
-    //   var searchTerm = $("#search-term").val().trim();
-    //   var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchTerm + "&api-key=AsC4bHdCeUwjuG91cDolgevIkyHa3vkr"
-    //   $.ajax({
-    //     url: queryURL,
-    //     method: "GET"
-    //   }).then(function(response) {
-    //     console.log(response);
-    //    var newP = $("<p>");
-    //   newP.addClass("p-headline");
-    //   newP.text(response.response.docs[0].headline.print_headline);
-    //   $("#results-pad").append(newP); 
-    //   var newP2 = $("<p>");
-    //   newP2.addClass("")
-    //   });
 
-    //   }); 
-
-     // This is our API key. Add your own API key between the ""
+// This is my API key for Open Weather API
      var APIKey = "eb971d001ccc0e5bf2880689819045f3";
 
 // Here we are building the URL we need to query the database
 
 function currentWeather(xTemp, xHumid, xWind, xUv){
 var tempF = (xTemp - 273.15) * 9/5 + 32;
-$("#current-temperature").text("Temperature:  " + tempF.toFixed(2) + String.fromCharCode(8457));
+$("#current-temperature").text("Temperature:  " + tempF.toFixed(1) + String.fromCharCode(8457));
 $("#current-humidity").text("Humidity:  " + xHumid + String.fromCharCode(37));
 $("#current-wind-speed").text("Wind Speed:  " + xWind.toFixed(1) + "MPH");
 $("#current-uv-index").text(xUv);
@@ -266,9 +228,17 @@ $.ajax({
 });
 } 
 
+function searchHistory(cityName) {
+  var newSearchP = $("<p>");
+  newSearchP.addClass("search-history");
+  newSearchP.text(cityName);
+  $("#search-block").append(newSearchP);
+}
 
-
-var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=Dumaguete&appid=" + APIKey;
+$("#search-btn").on("click", function(event){
+$("#five-days").empty();
+var citySearch = $("#search-city").val().trim();
+var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearch + "&appid=" + APIKey;
 // We then created an AJAX call
 $.ajax({
   url: queryURL1,
@@ -282,13 +252,13 @@ $.ajax({
   var dateDay = currentDate.getDate();
   var dateYear = currentDate.getFullYear();
   $("#city-date").text(currentCity + " (" + (dateMonth + 1) + "/" + dateDay + "/" + dateYear + ")");
-  var lon = response1.coord.lon;
-  var lat = response1.coord.lat;
+  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + "@2x.png")
+  var lon = response1.coord.lon; //longitude coordinate
+  var lat = response1.coord.lat; //latitude coordinate
   weatherQuery(lon, lat);
+  searchHistory(response1.name);
 });
-
-
-
+});
   </script>
 </body>
 
