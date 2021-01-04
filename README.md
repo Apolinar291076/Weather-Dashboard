@@ -13,5 +13,5 @@ I also add a messaging to indicate that an invalid city is selected using ajaxEr
 
 The following image demonstrates the application functionality:
 
-![weather dashboard demo](./Assets/weather-dashboard-demo.png)
+![](Assets/weather-dashboard-demo.png)
 
