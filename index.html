@@ -128,7 +128,7 @@ $.ajax({
   currentWeather(currentTemp, currentHumid, currentWind, currentUv);
   //Function to extract five days forecast
   fiveDaysWeather(response2.daily);
-});
+})
 } 
 
 function searchHistory(cityName) {
@@ -144,6 +144,7 @@ function cityWeatherSearch(city,enaHistory) {
 $.ajax({
   url: queryURL1,
   method: "GET"
+
 }).then(function(response1) {
   // Create CODE HERE to Log the queryURL
   console.log(response1);
@@ -156,13 +157,23 @@ $.ajax({
   $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png")
   if (enaHistory){
     searchHistory(response1.name);
-  }
-  
+  } 
   var lon = response1.coord.lon; //longitude coordinate
   var lat = response1.coord.lat; //latitude coordinate
   weatherQuery(lon, lat);
-})
+});
 }
+
+//Ajax error handler
+ $(document).ajaxError(function(){
+   var errorP = $("<p>")
+   errorP.attr("id", "search-error").text("Invalid City Entered!");
+   $("#search-form").after(errorP);
+ });
+//Ajax success handler
+ $(document).ajaxSuccess(function(){
+   $("#search-error").css("display", "none");
+ })
 
 $("#search-btn").on("click", function(event){
   $("#five-days").empty();
