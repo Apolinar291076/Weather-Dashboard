@@ -55,7 +55,7 @@
 
 // This is my API key for Open Weather API
      var APIKey = "eb971d001ccc0e5bf2880689819045f3";
-     var currentCitySearch = [];
+     var currentCitySearch = ["Melbourne", "Sydney", "Brisbane", "Canberra", "Perth", "Adelaide"];
 
 function currentWeather(xTemp, xHumid, xWind, xUv){
   var tempF = (xTemp - 273.15) * 9/5 + 32;
@@ -100,7 +100,7 @@ function fiveDaysWeather(xDaily) {
         var dtYear = dtCurrent.getFullYear();
         newPDate.text((dtMonth + 1) + "/" + dtDay + "/" + dtYear);
         var newIcon = $("<img>");
-        newIcon.attr("src","https://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png").attr("id", "img-forecast");
+        newIcon.attr("src","http://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png").attr("id", "img-forecast");
         var newPTemp = $("<p>");
         newPTemp.addClass("five-day-content").attr("id", ("temp-day" + i));
         var tempF = (xDaily[i].temp.day - 273.15) * 9/5 + 32;
@@ -154,11 +154,9 @@ $.ajax({
   var dateDay = currentDate.getDate();
   var dateYear = currentDate.getFullYear();
   $("#city-date").text(currentCity + " (" + (dateMonth + 1) + "/" + dateDay + "/" + dateYear + ")");
-  $("#img-current-weather").attr("src", "https://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png")
+  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png")
   if (enaHistory){
     searchHistory(response1.name);
-    currentCitySearch.push(response1.name);
-    localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
   } 
   var lon = response1.coord.lon; //longitude coordinate
   var lat = response1.coord.lat; //latitude coordinate
@@ -195,16 +193,17 @@ $("#search-block").on("click", ".search-history", function(event) {
   cityWeatherSearch(citySearch, false);
 });
 
-//cityWeatherSearch("Sydney", true);
-//localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
+cityWeatherSearch("Melbourne", true);
+localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
 var lastSearch = JSON.parse(localStorage.getItem("dashBoardUser"));
 console.log(lastSearch);
-for (var i = 0; i < lastSearch.length; i++){
-  //if ((lastSearch[i] != "Sydney") && (lastSearch.length != null)) {
-    if (lastSearch.length != null) {
+for (var i = 0; i < lastSearch.length - 1; i++){
+  if ((lastSearch[i] != "Melbourne") && (lastSearch.length != null)) {
     searchHistory(lastSearch[i]);
   }
 }
+
+
 })
   </script>
 </body>
