@@ -1,0 +1,99 @@
+header {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    text-align: center;
+    height: 70px;
+    border-radius: 5px;
+    background-color: rgb(66, 66, 70);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+  }
+  label {
+      display: block;
+  }
+  .form-control {
+      display: inline-flex;
+      width: 60%;
+  }
+  .btn {
+      margin-bottom: 3px;
+      margin-left: 5px;
+      background-color: blue;
+      color: white;
+  }
+  .search-history {
+      background-color: white;
+      display: block;
+      margin-bottom: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+  }
+  .col-4 {
+      background-color: rgb(247, 242, 242);
+  }
+  .col-8 {
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-top: 5px;
+  }
+  form {
+      margin-bottom: 10px;
+  }
+  #one-day {
+      margin: 10px 0px 20px 0px;
+      border: solid 1px rgb(211, 195, 195);
+      border-radius: 10px;
+      padding: 10px;
+  }
+  #five-days {
+      display: flex;
+      justify-content: space-between; 
+      flex-wrap: wrap;
+  }
+  .daily-five-days {
+    display: flex;   
+    flex-direction: column;
+    border-radius: 10px; 
+    margin-bottom: 10px;
+    background-color: blue;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .five-day-content, .five-day-date {
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 15px;
+  }
+  .five-day-date {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: left;
+  }
+  #current-uv-index {
+      color: white;
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+  #img-forecast {
+      height: 60px;
+      width: 60px;
+  }
+  #img-current-weather {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(53, 115, 156);
+  }
+  .search-history:hover {
+    background-color: yellowgreen;
+    font-weight: bold;
+  }
+  .search-history {
+    border: solid 0.5px rgb(224, 223, 223);
+  }
+  #city-date {
+    display: inline;
+  }

@@ -11,106 +11,7 @@
       integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
-    <style>
-      header {
-        display: flex; 
-        flex-direction: column;
-        justify-content: center; 
-        text-align: center;
-        height: 70px;
-        border-radius: 5px;
-        background-color: rgb(66, 66, 70);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        font-weight: bold;
-        color: white;
-      }
-      /* .container {
-          border-style: solid;
-      } */
-      label {
-          display: block;
-      }
-      .form-control {
-          display: inline-flex;
-          width: 60%;
-      }
-      .btn {
-          margin-bottom: 3px;
-          margin-left: 5px;
-          background-color: blue;
-          color: white;
-      }
-      .search-history {
-          /* border: solid 1px rgb(241, 240, 240); */
-          background-color: white;
-          display: block;
-          margin-bottom: 0px;
-          padding-top: 5px;
-          padding-bottom: 5px;
-      }
-    /*   .col-4, .col-8 {
-          border: solid 1px rgb(211, 195, 195);
-      } */
-      .col-4 {
-          background-color: rgb(247, 242, 242);
-      }
-      .col-8 {
-          padding-left: 5px;
-          padding-right: 5px;
-          padding-top: 5px;
-          /* border: solid 1px rgb(211, 195, 195); */
-      }
-      form {
-          margin-bottom: 10px;
-      }
-      #one-day {
-          margin: 10px 0px 20px 0px;
-          border: solid 1px rgb(211, 195, 195);
-          padding: 10px;
-      }
-      #five-days {
-          display: flex;
-          justify-content: space-between; 
-          flex-wrap: wrap;
-          /* border: solid 1px rgb(211, 195, 195); */
-          /* border-radius: 5px;  */
-      }
-      .daily-five-days {
-        display: flex;   
-        flex-direction: column;
-        /* border: solid 1px rgb(211, 195, 195); */
-        border-radius: 10px; 
-        margin-bottom: 10px;
-        background-color: blue;
-        color: white;
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-      .five-day-content, .five-day-date {
-          padding: 10px;
-          margin-bottom: 10px;
-          font-size: 15px;
-      }
-      .five-day-date {
-          font-size: 18px;
-          font-weight: bold;
-          text-align: left;
-      }
-      #current-uv-index {
-          color: white;
-          padding-left: 10px;
-          padding-right: 10px;
-      }
-      img {
-          height: 60px;
-          width: 60px;
-      }
-      .search-history:hover {
-        background-color: yellowgreen;
-        font-weight: bold;
-      }
-    </style>
+    <link rel="stylesheet" href="./style.css"/>
 </head>
 <body>
   <div class="container">
@@ -118,35 +19,28 @@
         Weather Dashboard
     </header>
   </div>
-    <!-- </br> -->
   <div class="container form-container">
     <div class="row">
         <div class="col-4" id="search-block">
-            <form>
+            <form id="search-form">
                 <label for="search-city" class="form-label">Search for a City:</label>
-                <input class="form-control" type="text" id="search-city">
+                <input class="form-control" type="text" id="search-city" placeholder="Enter City">
                  <button type="button" class="btn btn-outline-secondary" id="search-btn"><i class="fas fa-search"></i></button>
              </form>
-            <!--  <p class="search-history">Austin</p>
-             <p class="search-history">Chicago</p>
-             <p class="search-history">New York</p> -->
+             <!-- Dynamically generated p tag withe class = "search-history" will be placed here-->
         </div>
         <div class="col-8">
             <div id="one-day">
                 <!-- City and Date Information will go here -->
-                <h4 id="city-date"><img id="img-current-weather"></h4>            
+                <h4 id="city-date"></h4>&emsp;<img id="img-current-weather">  
                 <p id="current-temperature"></p>
                 <p id="current-humidity"></p>
                 <p id="current-wind-speed"></p>
-                <p>UV Index:  <span id="current-uv-index"></span></p>
+                <p>UV Index:  <span id="current-uv-index"></span>&emsp;<span id="current-uv-description"></span></p>
             </div>
             <h4>5-Day Forecast:</h4>
             <div id="five-days">
-                <!-- <div class="daily-five-days">
-                    <p class="five-day-date" id="date-day1">8/16/2019</p>
-                    <p class="five-day-content" id="temp-day1">Temp: 86.84</p>
-                    <p class="five-day-content" id="humid-day1">Humidity: 43%</p>
-                </div>-->
+               <!-- Five Days weather forecast will go here -->
             </div>
         </div>
     </div>
@@ -156,36 +50,41 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script>
+<script>
      $(document).ready(function() {
 
 // This is my API key for Open Weather API
      var APIKey = "eb971d001ccc0e5bf2880689819045f3";
-
-// Here we are building the URL we need to query the database
+     var currentCitySearch = ["Melbourne", "Sydney", "Brisbane", "Canberra", "Perth", "Adelaide"];
 
 function currentWeather(xTemp, xHumid, xWind, xUv){
-var tempF = (xTemp - 273.15) * 9/5 + 32;
-$("#current-temperature").text("Temperature:  " + tempF.toFixed(1) + String.fromCharCode(8457));
-$("#current-humidity").text("Humidity:  " + xHumid + String.fromCharCode(37));
-$("#current-wind-speed").text("Wind Speed:  " + xWind.toFixed(1) + "MPH");
-$("#current-uv-index").text(xUv);
+  var tempF = (xTemp - 273.15) * 9/5 + 32;
+  $("#current-temperature").text("Temperature:  " + tempF.toFixed(1) + String.fromCharCode(8457));
+  $("#current-humidity").text("Humidity:  " + xHumid + String.fromCharCode(37));
+  $("#current-wind-speed").text("Wind Speed:  " + xWind.toFixed(1) + "MPH");
+  $("#current-uv-index").text(xUv);
 
 if (xUv >= 0 && xUv < 3){
     $("#current-uv-index").css("background-color", "green");
+    $("#current-uv-index").css("color", "white");
+    $("#current-uv-description").text("(LOW)")
 } 
 else if (xUv >= 3 && xUv < 6) {
     $("#current-uv-index").css("background-color", "yellow");
     $("#current-uv-index").css("color", "black");
+    $("#current-uv-description").text("(MODERATE)")
 }
 else if (xUv >= 6 && xUv < 8){
     $("#current-uv-index").css("background-color", "orange");
+    $("#current-uv-description").text("(HIGH)")
 }
 else if (xUv >= 8 && xUv < 11){
     $("#current-uv-index").css("background-color", "red");
+    $("#current-uv-description").text("(VERY HIGH)")
 }
 else {
     $("#current-uv-index").css("background-color", "violet");
+    $("#current-uv-description").text("(EXTREME)")
 }
 }
 
@@ -201,7 +100,7 @@ function fiveDaysWeather(xDaily) {
         var dtYear = dtCurrent.getFullYear();
         newPDate.text((dtMonth + 1) + "/" + dtDay + "/" + dtYear);
         var newIcon = $("<img>");
-        newIcon.attr("src","http://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png");
+        newIcon.attr("src","http://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png").attr("id", "img-forecast");
         var newPTemp = $("<p>");
         newPTemp.addClass("five-day-content").attr("id", ("temp-day" + i));
         var tempF = (xDaily[i].temp.day - 273.15) * 9/5 + 32;
@@ -239,7 +138,7 @@ function searchHistory(cityName) {
   $("#search-block").append(newSearchP);
 }
 
-function cityWeatherSearch(city) {
+function cityWeatherSearch(city,enaHistory) {
   var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
 // We then created an AJAX call
 $.ajax({
@@ -254,7 +153,11 @@ $.ajax({
   var dateDay = currentDate.getDate();
   var dateYear = currentDate.getFullYear();
   $("#city-date").text(currentCity + " (" + (dateMonth + 1) + "/" + dateDay + "/" + dateYear + ")");
-  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + "@2x.png")
+  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png")
+  if (enaHistory){
+    searchHistory(response1.name);
+  }
+  
   var lon = response1.coord.lon; //longitude coordinate
   var lat = response1.coord.lat; //latitude coordinate
   weatherQuery(lon, lat);
@@ -264,17 +167,32 @@ $.ajax({
 $("#search-btn").on("click", function(event){
   $("#five-days").empty();
   var citySearch = $("#search-city").val().trim();
-  cityWeatherSearch(citySearch);
-  searchHistory(citySearch);
+  cityWeatherSearch(citySearch,true);
+  $("#search-city").val('');
+});
+
+$("#search-form").submit(function(event) { //added to avoid refreshing the entire page when enter is pressed.
+    event.preventDefault();
 });
 
 $("#search-block").on("click", ".search-history", function(event) {
-  //event.preventDefault();
   console.log("this event was triggered!")
   $("#five-days").empty();
-  var citySarch = $(this).text();
-  cityWeatherSearch(citySarch);
+  var citySearch = $(this).text();
+  cityWeatherSearch(citySearch, false);
 });
+
+cityWeatherSearch("Melbourne", true);
+localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
+var lastSearch = JSON.parse(localStorage.getItem("dashBoardUser"));
+console.log(lastSearch);
+for (var i = 0; i < lastSearch.length - 1; i++){
+  if ((lastSearch[i] != "Melbourne") && (lastSearch.length != null)) {
+    searchHistory(lastSearch[i]);
+  }
+}
+
+
 })
   </script>
 </body>
