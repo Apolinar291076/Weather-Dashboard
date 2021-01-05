@@ -103,7 +103,7 @@ function fiveDaysWeather(xDaily) {
         var dtYear = dtCurrent.getFullYear();
         newPDate.text((dtMonth + 1) + "/" + dtDay + "/" + dtYear);
         var newIcon = $("<img>");
-        newIcon.attr("src","http://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png").attr("id", "img-forecast");
+        newIcon.attr("src","https://openweathermap.org/img/wn/" + xDaily[i].weather[0].icon + "@2x.png").attr("id", "img-forecast");
         var newPTemp = $("<p>");
         newPTemp.addClass("five-day-content").attr("id", ("temp-day" + i));
         var tempF = (xDaily[i].temp.day - 273.15) * 9/5 + 32;
