@@ -4,7 +4,7 @@ Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather da
 
 ## Project Notes
 
-The UV index value color assignment could be found on the the following link: (https://en.wikipedia.org/wiki/Ultraviolet).
+The UV index value color description can be found on the the following link: (https://en.wikipedia.org/wiki/Ultraviolet).
 
 Upon opening the first time, the 'Default Condition' will appear as shown in the image below (weather-dashboard-default.PNG). The 'lastSearch' array in the user program and 'dashBoardUser' in the local storage are empty.
 
@@ -26,9 +26,12 @@ https://github.com/Apolinar291076/Weather-Dashboard.git
 
 The following image demonstrates the application functionality:
 
+### Default Condition
 ![Default Condition](./Assets/weather-dashboard-default.PNG)
 
+### Working Demo
 ![Working Demo](./Assets/weather-dashboard-demo.PNG)
 
+### Invalid City
 ![Invalid City](./Assets/weather-invalid-city.PNG)
 
