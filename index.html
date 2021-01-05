@@ -157,7 +157,7 @@ $.ajax({
   var dateDay = currentDate.getDate();
   var dateYear = currentDate.getFullYear();
   $("#city-date").text(currentCity + " (" + (dateMonth + 1) + "/" + dateDay + "/" + dateYear + ")");
-  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png").css("width", "50px").css("height", "50px").css("background-color", "rgb(53, 115, 156");
+  $("#img-current-weather").attr("src", "https://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png").css("width", "50px").css("height", "50px").css("background-color", "rgb(53, 115, 156");
   if (enaHistory){
     //lastSearch = JSON.parse(localStorage.getItem("dashBoardUser"));
     if ((lastSearch.length == 0) || (lastSearch.length > 0 && !lastSearch.includes(response1.name))) {
