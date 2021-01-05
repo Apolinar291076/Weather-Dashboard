@@ -36,9 +36,10 @@
                 <p id="current-temperature"></p>
                 <p id="current-humidity"></p>
                 <p id="current-wind-speed"></p>
-                <p>UV Index:  <span id="current-uv-index"></span>&emsp;<span id="current-uv-description"></span></p>
+                <!-- <p id="current-uv">UV Index:  <span id="current-uv-index"></span>&emsp;<span id="current-uv-description"></span></p> -->
+                <p id="current-uv"></p>
             </div>
-            <h4>5-Day Forecast:</h4>
+            <h4 id="five-days-h4"></h4>
             <div id="five-days">
                <!-- Five Days weather forecast will go here -->
             </div>
@@ -55,13 +56,14 @@
 
 // This is my API key for Open Weather API
      var APIKey = "eb971d001ccc0e5bf2880689819045f3";
-     var currentCitySearch = ["Melbourne", "Sydney", "Brisbane", "Canberra", "Perth", "Adelaide"];
+     //var currentCitySearch = ["Melbourne", "Sydney", "Brisbane", "Canberra", "Perth", "Adelaide"];
 
 function currentWeather(xTemp, xHumid, xWind, xUv){
   var tempF = (xTemp - 273.15) * 9/5 + 32;
   $("#current-temperature").text("Temperature:  " + tempF.toFixed(1) + String.fromCharCode(8457));
   $("#current-humidity").text("Humidity:  " + xHumid + String.fromCharCode(37));
   $("#current-wind-speed").text("Wind Speed:  " + xWind.toFixed(1) + "MPH");
+  $("#current-uv").html("UV Index:  <span id='current-uv-index'></span>&emsp;<span id='current-uv-description'></span>");
   $("#current-uv-index").text(xUv);
 
 if (xUv >= 0 && xUv < 3){
@@ -89,6 +91,7 @@ else {
 }
 
 function fiveDaysWeather(xDaily) {
+    $("#five-days-h4").text("5-Day Forecast:");
     for (var i = 1; i <= 5; i++) {
         var newDiv = $("<div>");
         newDiv.addClass("daily-five-days");
@@ -154,9 +157,14 @@ $.ajax({
   var dateDay = currentDate.getDate();
   var dateYear = currentDate.getFullYear();
   $("#city-date").text(currentCity + " (" + (dateMonth + 1) + "/" + dateDay + "/" + dateYear + ")");
-  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png")
+  $("#img-current-weather").attr("src", "http://openweathermap.org/img/wn/" + response1.weather[0].icon + ".png").css("width", "50px").css("height", "50px").css("background-color", "rgb(53, 115, 156");
   if (enaHistory){
+    //lastSearch = JSON.parse(localStorage.getItem("dashBoardUser"));
+    if ((lastSearch.length == 0) || (lastSearch.length > 0 && !lastSearch.includes(response1.name))) {
     searchHistory(response1.name);
+    lastSearch.push(response1.name);
+    localStorage.setItem("dashBoardUser", JSON.stringify(lastSearch));
+    }
   } 
   var lon = response1.coord.lon; //longitude coordinate
   var lat = response1.coord.lat; //latitude coordinate
@@ -165,15 +173,15 @@ $.ajax({
 }
 
 //Ajax error handler
- $(document).ajaxError(function(){
+ /* $(document).ajaxError(function(){
    var errorP = $("<p>")
    errorP.attr("id", "search-error").text("Invalid City Entered!");
    $("#search-form").after(errorP);
- });
+ }); */
 //Ajax success handler
- $(document).ajaxSuccess(function(){
+/*  $(document).ajaxSuccess(function(){
    $("#search-error").css("display", "none");
- })
+ }) */
 
 $("#search-btn").on("click", function(event){
   $("#five-days").empty();
@@ -193,16 +201,22 @@ $("#search-block").on("click", ".search-history", function(event) {
   cityWeatherSearch(citySearch, false);
 });
 
-cityWeatherSearch("Melbourne", true);
-localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
+//cityWeatherSearch("Melbourne", true);
+//localStorage.setItem("dashBoardUser", JSON.stringify(currentCitySearch));
 var lastSearch = JSON.parse(localStorage.getItem("dashBoardUser"));
-console.log(lastSearch);
-for (var i = 0; i < lastSearch.length - 1; i++){
-  if ((lastSearch[i] != "Melbourne") && (lastSearch.length != null)) {
+/*if lastSearch returns null, which will be the case when the application runs for the first time on a PC,
+intialise the lastSearch to be an empty array.*/
+if (lastSearch == null){
+  lastSearch = [];
+  console.log(lastSearch);
+  console.log(lastSearch.length);
+}
+if (lastSearch.length > 0){
+  for (var i = 0; i < lastSearch.length; i++){
     searchHistory(lastSearch[i]);
   }
+  cityWeatherSearch(lastSearch[0], false);
 }
-
 
 })
   </script>
